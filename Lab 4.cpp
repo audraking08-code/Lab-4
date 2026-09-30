@@ -10,56 +10,71 @@ int main()
 {
 	int beginningInventory = 50;
 
-    std::string foodItem;
-    std::cout << "Pick a food item.";
-	std::cin >> foodItem;
-    std::string itemCode;
-    std::cout << "Enter item code";
-    std::cin >> itemCode;
-    int itemQuantity;
-    std::cout << "Enter item quantity";
+	char drinkChoice, sizeChoice, memberChoice;
+	int quantity;
+	std::string foodName;
+	std::string sizeName;
+	double unitPrice = 0.0;
+	double subtotal = 0.0;
+
+	std::cout << "---Menu---";
+	std::cout << "Items";
+	std::cout << std::fixed << std::setprecision(2);
+	std::cout << std::setw(15) << "Small (s)";
+	std::cout << std::setw(15) << "Medium (m)";
+	std::cout << std::setw(15) << "Large (l)";
+	std::cout << std::setw(18) << "Fries" << std::setw(15) << "$1.00" << std::setw(15) << "$1.50" << std::setw(15) << "$2.00" << std::endl;
+	std::cout << std::setw(18) << "Burger" << std::setw(15) << "$1.00" << std::setw(15) << "$1.50" << std::setw(15) << "$2.00" << std::endl;
+	std::cout << std::setw(18) << "Pizza" << std::setw(15) << "$1.00" << std::setw(15) << "$1.50" << std::setw(15) << "$2.00" << std::endl;
+	std::cout << std::setw(18) << "Soda" << std::setw(15) << "$1.00" << std::setw(15) << "$1.50" << std::setw(15) << "$2.00" << std::endl;
+	std::cout << "----------" << std::endl;
+
+	std::cout << "Pick a food item.";
+	std::cin >> foodName;
+	std::cout << "Pick a size, (s/m/l). ";
+	std::cin >> sizeName;
+	int itemQuantity;
+	std::cout << "Enter item quantity";
 	std::cin >> itemQuantity;
-    double unitPrice;
-    std::cout << "Enter unit price";
-	std::cin >> unitPrice;
-    char isMember;
-    std::cout << "Are you a member? (Y/N)";
+	char isMember;
+	std::cout << "Are you a member? (Y/N)";
 	std::cin >> isMember;
 
-    std::cout << std::setw(10) <<
+	if (foodName == "Pizza" && sizeName == "s") unitPrice = 1.00;
+	else if (sizeName == "m") unitPrice = 1.50;
+	else if (sizeName == "l") unitPrice = 2.00;
+	if (foodName == "Burger" && sizeName == "s") unitPrice = 1.00;
+	else if (sizeName == "m") unitPrice = 1.50;
+	else if (sizeName == "l") unitPrice = 2.00;
+	if (foodName == "Fries" && sizeName == "s") unitPrice = 1.00;
+	else if (sizeName == "m") unitPrice = 1.50;
+	else if (sizeName == "l") unitPrice = 2.00;
+	if (foodName == "Soda" && sizeName == "s") unitPrice = 1.00;
+	else if (sizeName == "m") unitPrice = 1.50;
+	else if (sizeName == "l") unitPrice = 2.00;
+
+	subtotal = unitPrice * itemQuantity;
+
+	if (isMember == 'Y' || isMember == 'y')
+	{
+		subtotal = subtotal * 0.9;
+	}
+
+std::cout << std::setw(10) <<
         std::setprecision(2)
-        << "Receipt";
-	if (isMember == 'Y' || isMember == 'y') {
-		std::cout << std::setw(10) << "Food Item: " << foodItem << std::endl;
-		std::cout << std::setw(10) << "Item Code: " << itemCode << std::endl;
-		std::cout << std::setw(10) << "Item Quantity: " << itemQuantity << std::endl;
-		std::cout << std::setw(10) << "Unit Price: $" << unitPrice << std::endl;
-		double totalPrice = itemQuantity * unitPrice;
-		double discount = totalPrice * 0.1; // 10% discount for members
-		double finalPrice = totalPrice - discount;
-		std::cout << std::setw(10) << "Total Price: $" << totalPrice << std::endl;
-		std::cout << std::setw(10) << "Discount: $" << discount << std::endl;
-		std::cout << std::setw(10) << "Final Price: $" << finalPrice << std::endl;
-	}
-	else {
-		std::cout << std::setw(10) << "Food Item: " << foodItem << std::endl;
-		std::cout << std::setw(10) << "Item Code: " << itemCode << std::endl;
-		std::cout << std::setw(10) << "Item Quantity: " << itemQuantity << std::endl;
-		std::cout << std::setw(10) << "Unit Price: $" << unitPrice << std::endl;
-		double totalPrice = itemQuantity * unitPrice;
-		std::cout << std::setw(10) << "Total Price: $" << totalPrice << std::endl;
-	}
+        << "---Receipt---";
+std::cout << "Food Item: " << foodName << std::endl;
+std::cout << "unit Price: " << unitPrice << std::endl;
+std::cout << "Subtotal: " << subtotal << std::endl;
+
 		std::cout << "Enter cashier notes";
 		std::string cashierNotes;
 		std::cin.ignore();
 		std::getline(std::cin, cashierNotes);
 		
 		std::cout << "Ending Inventory";
-		//std::string endingInventory;
 		std::cout << beginningInventory - itemQuantity;
-		//std::cout << "Ending Inventory Remaining: " << endingInventory << std::endl;
-		//std::cout << std::setw(10) <<
-		//std::setprecision(2);
+		
 
 }
 
